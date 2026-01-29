@@ -1,0 +1,68 @@
+LISTA COMPLETA DE COMANDOS (desde snapd) PARA PODER SUBIR UN PROGRAMA A ARDUINO UNO
+
+1) Instalar y activar snapd
+sudo apt update
+sudo apt install -y snapd
+sudo systemctl enable --now snapd
+
+2) Instalar Arduino CLI (snap)
+sudo snap install arduino-cli
+
+3) Inicializar Arduino CLI y preparar cores
+arduino-cli config init
+arduino-cli core update-index
+arduino-cli core install arduino:avr
+arduino-cli core list
+
+4) Permiso para usar el puerto serial (UNO)
+sudo usermod -aG dialout $USER
+# cerrar sesión y volver a entrar (o reiniciar VM)
+
+5) Verificar que el Arduino se detecta y ver el puerto
+lsusb
+ls /dev/ttyACM* /dev/ttyUSB* 2>/dev/null
+arduino-cli board list
+
+6) Compilar y subir (ejemplo: proyecto ~/led, sketch en carpeta "ino")
+cd ~/led
+arduino-cli compile --fqbn arduino:avr:uno ino
+arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno ino
+
+7) Monitor serial (alternativa recomendada por snap)
+sudo apt install -y picocom
+picocom -b 9600 /dev/ttyACM0
+# salir de picocom: Ctrl+A luego Ctrl+X
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+const int LED_PIN = 13;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    cmd.trim();
+
+    if (cmd == "LED_ON") {
+      digitalWrite(LED_PIN, HIGH);
+      Serial.println("OK:LED_ON");
+    } else if (cmd == "LED_OFF") {
+      digitalWrite(LED_PIN, LOW);
+      Serial.println("OK:LED_OFF");
+    } else {
+      Serial.println("ERR:CMD");
+    }
+  }
+}
+
+
+
+
+
+
+
