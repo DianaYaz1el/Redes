@@ -3,6 +3,7 @@ LISTA COMPLETA DE COMANDOS (desde snapd) PARA PODER SUBIR UN PROGRAMA A ARDUINO 
 1) Instalar y activar snapd
 sudo apt update
 sudo apt install -y snapd
+sudo apt install -y python3 python3-flask python3-serial
 sudo systemctl enable --now snapd
 
 2) Instalar Arduino CLI (snap)
@@ -440,6 +441,7 @@ void loop() {
     }
   }
 }
+
 
 
 
