@@ -1,10 +1,16 @@
 LISTA COMPLETA DE COMANDOS (desde snapd) PARA PODER SUBIR UN PROGRAMA A ARDUINO UNO
 
+
 1) Instalar y activar snapd
 sudo apt update
 sudo apt install -y snapd
 sudo apt install -y python3 python3-flask python3-serial
 sudo systemctl enable --now snapd
+
+1.1) Generador de contrasenas Hash (para app.py)
+sudo apt update
+sudo apt install -y python3-werkzeug
+python3 -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('12345'))"
 
 2) Instalar Arduino CLI (snap)
 sudo snap install arduino-cli
@@ -441,6 +447,7 @@ void loop() {
     }
   }
 }
+
 
 
 
