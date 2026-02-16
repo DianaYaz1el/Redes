@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 from werkzeug.security import check_password_hash
 import socket
 
-APP_USER = "Diana"
-APP_PW_HASH = "scrypt:32768:8:1$ZvdNERA6v54fKdcY$2a6607eb0ba5751945e5c7b0c646ae5756e2c210f285168910a92ea8322c004316573e61d2bcad76a08bfb959b7cf758b3cdc14822160232af95acb5b7274d49"
-SECRET_KEY = "Redes"
+APP_USER = "PEGA_TU_USUARIO_AQUI"       # Ejemplo: diana
+APP_PW_HASH = "PEGA_TU_HASH_AQUI"       # Ejemplo: "scrypt:32768:8:1$...$..."
+SECRET_KEY = "PEGA_TU_SECRET_KEY_AQUI"  # clave larga y aleatoria
 
 TCP_HOST = "127.0.0.1"
 TCP_PORT = 5001  # coincide con servidor_tcp2.py
