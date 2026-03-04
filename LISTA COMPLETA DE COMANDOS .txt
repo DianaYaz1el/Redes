@@ -447,7 +447,37 @@ void loop() {
     }
   }
 }
+=======================================================================================================================
+Configurar una nueva red (Ya teniendo acceso a la raspberry)
+nmcli -f NAME,AUTOCONNECT,AUTOCONNECT-PRIORITY connection show
 
+Subirle la prioridad y agregar la(s) red(es) de respaldo.
+
+1) Sube prioridad de REDES2GHZ (o el nombre de tu red)
+sudo nmcli con mod "netplan-wlan0-REDES2GHZ" connection.autoconnect yes
+sudo nmcli con mod "netplan-wlan0-REDES2GHZ" connection.autoconnect-priority 100
+
+2) Agrega la red de respaldo
+
+sudo nmcli con add type wifi ifname wlan0 con-name "CASA_ALUMNO" ssid "CASA_ALUMNO"
+sudo nmcli con mod "CASA_ALUMNO" wifi-sec.key-mgmt wpa-psk
+sudo nmcli con mod "CASA_ALUMNO" wifi-sec.psk "CLAVE_CASA"
+sudo nmcli con mod "CASA_ALUMNO" connection.autoconnect yes
+sudo nmcli con mod "CASA_ALUMNO" connection.autoconnect-priority 60
+
+
+3) Verifica que quedó como quieres
+
+nmcli -f NAME,AUTOCONNECT,AUTOCONNECT-PRIORITY connection show
+
+Con esto, el comportamiento será:
+
+* Si existe **REDES2GHZ**, se conecta a esa (100).
+* Si **no existe REDES2GHZ**, intenta **CASA_ALUMNO** (60).
+
+### (Opcional) Si luego quieres borrar una red guardada
+
+sudo nmcli con delete "CASA_ALUMNO"
 
 
 
