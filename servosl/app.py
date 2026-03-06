@@ -6,9 +6,9 @@ from werkzeug.security import check_password_hash
 import socket
 
 # ====== CREDENCIALES ======
-APP_USER = "rpidani"
-APP_PW_HASH = "scrypt:32768:8:1$AQYoCGYxUssOQBZQ$c4dafc9b597dc3a7112a427cb618abe8ddc61a7c707beedcafc0b3ef500b67efdb219dd04606b5f63558e976bb7d062199cc0782b5dd33d29caf7370184e7706"
-SECRET_KEY = "0c9b3cb12d42e154a7c5444d13fa7e3bcd926e7e99f4b54465045c0588bc2a7e"
+APP_USER = "NOMBRA TU USUARIO"
+APP_PW_HASH = "PEGA_AQUI_EL_HASH_GENERAD"
+SECRET_KEY = "REDES"
 
 # ====== TCP hacia servidor_tcp.py ======
 TCP_HOST = "127.0.0.1"
